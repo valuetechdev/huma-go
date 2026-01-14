@@ -1,0 +1,118 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Huma's API overlay
+  version: 1.0.0
+actions:
+  - target: "$.openapi"
+    update: "3.0.3"
+
+  - target: "$.paths['/users/{userId}/identifications/{id}'].put"
+    description: Alter operationId
+    update:
+      operationId: "updateUserIdentification"
+  - target: "$.paths['/users/{userId}/identifications/{id}'].delete"
+    description: Alter operationId
+    update:
+      operationId: "removeUserIdentification"
+  - target: "$.paths['/users/{userId}/identifications'].post"
+    description: Alter operationId
+    update:
+      operationId: "addUserIdentification"
+
+  - target: "$.paths['/users/{userId}/emergency/{id}'].put"
+    description: Alter operationId
+    update:
+      operationId: "updateUserEmergencyContact"
+  - target: "$.paths['/users/{userId}/emergency/{id}'].delete"
+    description: Alter operationId
+    update:
+      operationId: "removeUserEmergencyContact"
+  - target: "$.paths['/users/{userId}/emergency'].post"
+    description: Alter operationId
+    update:
+      operationId: "addUserEmergencyContact"
+
+  - target: "$.paths['/users/{userId}/children/{id}'].put"
+    description: Alter operationId
+    update:
+      operationId: "updateUserChild"
+  - target: "$.paths['/users/{userId}/children/{id}'].delete"
+    description: Alter operationId
+    update:
+      operationId: "removeUserChild"
+  - target: "$.paths['/users/{userId}/children'].post"
+    description: Alter operationId
+    update:
+      operationId: "addUserChild"
+
+  - target: "$.paths['/users'].get"
+    description: Alter operationId
+    update:
+      operationId: "listUsers"
+  - target: "$.paths['/users'].post"
+    description: Alter operationId
+    update:
+      operationId: "createUser"
+
+  - target: "$.paths['/users/{id}/subordinates'].get"
+    description: Alter operationId
+    update:
+      operationId: "listUserSubordinates"
+  - target: "$.paths['/users/{id}/subordinates'].post"
+    description: Alter operationId
+    update:
+      operationId: "addUserSubordinates"
+
+  - target: "$.paths['/users/{id}/groups'].post"
+    description: Alter operationId
+    update:
+      operationId: "addUserToGroups"
+  - target: "$.paths['/users/{id}/groups'].delete"
+    description: Alter operationId
+    update:
+      operationId: "removeUserFromGroups"
+
+  - target: "$.paths['/job-titles'].get"
+    description: Alter operationId
+    update:
+      operationId: "listJobTitles"
+
+  - target: "$.paths['/groups'].get"
+    description: Alter operationId
+    update:
+      operationId: "listGroups"
+
+  - target: "$.paths['/users/{id}'].get"
+    description: Alter operationId
+    update:
+      operationId: "getUser"
+  - target: "$.paths['/users/{id}'].patch"
+    description: Alter operationId
+    update:
+      operationId: "updateUser"
+
+  - target: "$.paths['/users/{id}/work-schedule'].get"
+    description: Alter operationId
+    update:
+      operationId: "getUserWorkSchedule"
+
+  - target: "$.paths['/users/{id}/supervisor'].get"
+    description: Alter operationId
+    update:
+      operationId: "getUserSupervisor"
+
+  - target: "$.paths['/users/{id}/permissions'].get"
+    description: Alter operationId
+    update:
+      operationId: "listUserPermissions"
+
+  - target: "$.paths['/users/jubilees'].get"
+    description: Alter operationId
+    update:
+      operationId: "listJubilees"
+
+  - target: "$.paths['/holidays/{countryCode}'].get"
+    description: Alter operationId
+    update:
+      operationId: "listPublicHolidays"

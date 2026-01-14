@@ -1,0 +1,3367 @@
+openapi: 3.1.0
+info:
+  title: Huma API
+  version: 1.53.0-SNAPSHOT
+servers:
+  - url: https://demo.openapi.humahr.com
+    description: Generated server url
+tags:
+  - name: Authentication
+    description: Endpoints for authentication and tokens.
+  - name: Job Title
+    description: Endpoints for job titles.
+  - name: Holiday
+    description: Endpoints for public holidays.
+  - name: User child
+    description: Endpoints for user management.
+  - name: User identification
+    description: Endpoints for user management.
+  - name: User
+    description: Endpoints for user management.
+  - name: Group
+    description: Endpoints for group management.
+  - name: User emergency contact
+    description: Endpoints for user management.
+paths:
+  /users/{userId}/identifications/{id}:
+    put:
+      tags:
+        - User identification
+      summary: Update identification
+      description: Updates an existing identification entry for the specified user.
+      operationId: updateIdentification
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IdentificationInput'
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserIdentification'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+    delete:
+      tags:
+        - User identification
+      summary: Remove identification
+      description: Removes an identification entry by its ID for the specified user.
+      operationId: removeIdentification
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Deleted Successfully
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+      security:
+        - authentication: []
+  /users/{userId}/emergency/{id}:
+    put:
+      tags:
+        - User emergency contact
+      summary: Update emergency contact
+      description: Update an existing emergency contact for the specified user.
+      operationId: updateEmergencyContact
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmergencyContactInput'
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEmergencyContact'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+    delete:
+      tags:
+        - User emergency contact
+      summary: Remove emergency contact
+      description: Remove an emergency contact by ID for the specified user.
+      operationId: removeEmergencyContact
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Deleted Successfully
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+      security:
+        - authentication: []
+  /users/{userId}/children/{id}:
+    put:
+      tags:
+        - User child
+      summary: Update child
+      description: Updates properties of a child by its ID for a specified user.
+      operationId: updateChild
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildInput'
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserChild'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+    delete:
+      tags:
+        - User child
+      summary: Remove child
+      description: Removes a child by its ID for a specified user.
+      operationId: removeChild
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Deleted Successfully
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+      security:
+        - authentication: []
+  /users:
+    get:
+      tags:
+        - User
+      summary: List users
+      description: List users in the organization with filters and pagination.
+      operationId: list
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 25
+            maximum: 50
+            minimum: 0
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+            minimum: 0
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: orderDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+        - name: jobTitle
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              format: uuid
+            maxItems: 25
+            minItems: 0
+            uniqueItems: true
+        - name: team
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              format: uuid
+            maxItems: 25
+            minItems: 0
+            uniqueItems: true
+        - name: location
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              format: uuid
+            maxItems: 25
+            minItems: 0
+            uniqueItems: true
+        - name: company
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              format: uuid
+            maxItems: 25
+            minItems: 0
+            uniqueItems: true
+        - name: supervisor
+          in: query
+          description: Users with supervisor ID. Use 'none' to filter users without a supervisor. Supports alias 'me' for current user.
+          required: false
+          schema:
+            type: string
+            description: Users with supervisor ID. Use 'none' to filter users without a supervisor. Supports alias 'me' for current user.
+        - name: isSupervisor
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: isActive
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: notRecursivelySupervisorOf
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - name: notRecursivelySubordinateOf
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - name: permission
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: id
+          in: query
+          description: Set of user IDs to include. Supports alias 'me' for current user.
+          required: false
+          schema:
+            type: array
+            description: Set of user IDs to include. Supports alias 'me' for current user.
+            items:
+              type: string
+              description: Set of user IDs to include. Supports alias 'me' for current user.
+            maxItems: 25
+            minItems: 0
+            uniqueItems: true
+        - name: excludeId
+          in: query
+          description: Set of user IDs to exclude. Supports alias 'me' for current user.
+          required: false
+          schema:
+            type: array
+            description: Set of user IDs to exclude. Supports alias 'me' for current user.
+            items:
+              type: string
+              description: Set of user IDs to exclude. Supports alias 'me' for current user.
+            maxItems: 25
+            minItems: 0
+            uniqueItems: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageUser'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+    post:
+      tags:
+        - User
+      summary: Create user
+      description: Create a new user and optionally send an invitation.
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /users/{userId}/identifications:
+    post:
+      tags:
+        - User identification
+      summary: Add identification
+      description: Adds an identification entry for the specified user.
+      operationId: addIdentification
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IdentificationInput'
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserIdentification'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /users/{userId}/emergency:
+    post:
+      tags:
+        - User emergency contact
+      summary: Add emergency contact
+      description: Add an emergency contact for the specified user.
+      operationId: addEmergencyContact
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmergencyContactInput'
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEmergencyContact'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /users/{userId}/children:
+    post:
+      tags:
+        - User child
+      summary: Add child
+      description: Adds a child for a specified user by their ID.
+      operationId: addChild
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildInput'
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserChild'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /users/{id}/subordinates:
+    get:
+      tags:
+        - User
+      summary: List subordinates
+      description: List all subordinates of a specific user by their ID.
+      operationId: listSubordinates
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user. Supports alias 'me' for current user.
+          required: true
+          schema:
+            type: string
+            description: ID of the user. Supports alias 'me' for current user.
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SimpleUser'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+    post:
+      tags:
+        - User
+      summary: Add subordinate
+      description: Add subordinates to a specific user by their ID.
+      operationId: addSubordinates
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user. Supports alias 'me' for current user.
+          required: true
+          schema:
+            type: string
+            description: ID of the user. Supports alias 'me' for current user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SimpleUser'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /users/{id}/resend-verify-email: {}
+  /users/{id}/invite: {}
+  /users/{id}/groups:
+    post:
+      tags:
+        - User
+      summary: Add user to groups
+      description: Add the specified user to the given groups.
+      operationId: addGroups
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user. Supports alias 'me' for current user.
+          required: true
+          schema:
+            type: string
+            description: ID of the user. Supports alias 'me' for current user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+    delete:
+      tags:
+        - User
+      summary: Remove user from groups
+      description: Remove the specified user from the given groups.
+      operationId: deleteGroups
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user. Supports alias 'me' for current user.
+          required: true
+          schema:
+            type: string
+            description: ID of the user. Supports alias 'me' for current user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /users/{id}/deactivate: {}
+  /users/{id}/cover-image: {}
+  /users/{id}/avatar-image: {}
+  /users/{id}/activate: {}
+  /users/verify-email: {}
+  /users/invite: {}
+  /job-titles:
+    get:
+      tags:
+        - Job Title
+      summary: List job title summaries
+      description: Lists job title summaries. Supports optional search.
+      operationId: list_1
+      parameters:
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobTitleSummary'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /groups:
+    get:
+      tags:
+        - Group
+      summary: List groups
+      description: List groups with optional filters and pagination.
+      operationId: list_2
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+            maximum: 25
+            minimum: 0
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+            minimum: 0
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - team
+                - location
+                - company
+            uniqueItems: true
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: orderDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageGroup'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /groups/{id}/members: {}
+  /groups/{id}/grants: {}
+  /groups/{id}/grant: {}
+  /auth/passwordless/email: {}
+  /auth/oauth/token:
+    post:
+      tags:
+        - Authentication
+      summary: Obtain token
+      description: |-
+        Post an OAuth2 grant_type ('code', 'client_credentials', 'refresh token') to obtain an access token
+        Open API users should set grant_type to 'client_credentials'.
+      operationId: tokenForm
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+              required:
+                - grant_type
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/AuthCodeGrantTypeInput'
+                - $ref: '#/components/schemas/ClientCredentialsGrantTypeInput'
+                - $ref: '#/components/schemas/EmailGrantTypeInput'
+                - $ref: '#/components/schemas/PasswordGrantTypeInput'
+                - $ref: '#/components/schemas/RefreshGrantTypeInput'
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credentials'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+  /auth/oauth/revoke:
+    post:
+      tags:
+        - Authentication
+      summary: Revoke tokens
+      description: Revoke the current user's tokens and invalidate the session.
+      operationId: revoke
+      responses:
+        "200":
+          description: Successful Response
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+  /users/{id}:
+    get:
+      tags:
+        - User
+      summary: Get user
+      description: Fetch detailed user information by ID.
+      operationId: find
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user. Supports alias 'me' for current user.
+          required: true
+          schema:
+            type: string
+            description: ID of the user. Supports alias 'me' for current user.
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+    patch:
+      tags:
+        - User
+      summary: Update user
+      description: Update a user's details including personal info, employment fields, and groups.
+      operationId: update
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user. Supports alias 'me' for current user.
+          required: true
+          schema:
+            type: string
+            description: ID of the user. Supports alias 'me' for current user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDetailsInput'
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /job-titles/{id}: {}
+  /groups/{id}: {}
+  /groups/{id}/convert: {}
+  /users/{id}/work-schedule:
+    get:
+      tags:
+        - User
+      summary: Get work schedule
+      description: Gets the current work schedule for a specific user by their ID.
+      operationId: findWorkSchedule
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user. Supports alias 'me' for current user.
+          required: true
+          schema:
+            type: string
+            description: ID of the user. Supports alias 'me' for current user.
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkSchedule'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /users/{id}/supervisor:
+    get:
+      tags:
+        - User
+      summary: Get supervisor for user
+      description: Gets the supervisor of a specific user by their ID.
+      operationId: findSupervisor
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user. Supports alias 'me' for current user.
+          required: true
+          schema:
+            type: string
+            description: ID of the user. Supports alias 'me' for current user.
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supervisor'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /users/{id}/permissions:
+    get:
+      tags:
+        - User
+      summary: List unit permissions on a user
+      description: List unit permissions on a user.
+      operationId: listPermissions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                uniqueItems: true
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /users/{id}/permissions/{targetId}: {}
+  /users/permissions: {}
+  /users/jubilees:
+    get:
+      tags:
+        - User
+      summary: List jubilees
+      description: List jubilees within a date range.
+      operationId: listJubilees
+      parameters:
+        - name: fromDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: orderDirection
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageJubilee'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /job-titles/paged: {}
+  /holidays/{countryCode}:
+    get:
+      tags:
+        - Holiday
+      summary: List public holidays
+      description: List public holidays for a country within the specified date range.
+      operationId: findDaysForCountry
+      parameters:
+        - name: countryCode
+          in: path
+          required: true
+          schema:
+            type: string
+            format: ISO 3166-1 alpha-2
+        - name: fromDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+                uniqueItems: true
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFieldFormatResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardServerErrorResponse'
+      security:
+        - authentication: []
+  /auth/providers: {}
+  /auth/providers/{providerType}: {}
+  /auth/organizations: {}
+  /groups/{id}/members/{userId}: {}
+components:
+  schemas:
+    IdentificationInput:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - national
+            - passport
+        country:
+          type: string
+          maxLength: 2
+          minLength: 0
+        value:
+          type: string
+          maxLength: 255
+          minLength: 1
+      required:
+        - country
+        - type
+        - value
+    InvalidFieldFormatResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          example: field:invalid-format
+        errorMessage:
+          type: string
+          description: error Message
+          example: Invalid field Format
+        fields:
+          type: array
+          example: id
+          items:
+            type: string
+          uniqueItems: true
+    InvalidTokenResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: invalid_token
+        error_description:
+          type: string
+          example: 'example: User does not exist'
+      required:
+        - error
+        - error_description
+    NotFoundErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          example: object:not-found
+        errorMessage:
+          type: string
+          example: Object not found
+        interpolations:
+          type: object
+          additionalProperties:
+            type: string
+          example: '{ type: ObjectType , id: UUID }'
+      required:
+        - errorCode
+        - errorMessage
+        - interpolations
+    Header:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/HeaderElement'
+        name:
+          type: string
+        value:
+          type: string
+    HeaderElement:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        parameterCount:
+          type: integer
+          format: int32
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/NameValuePair'
+    HttpEntity:
+      type: object
+      properties:
+        content: {}
+        contentLength:
+          type: integer
+          format: int64
+        streaming:
+          type: boolean
+        repeatable:
+          type: boolean
+        chunked:
+          type: boolean
+        contentType:
+          $ref: '#/components/schemas/Header'
+        contentEncoding:
+          $ref: '#/components/schemas/Header'
+    HttpParams: {}
+    HttpResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          writeOnly: true
+        entity:
+          $ref: '#/components/schemas/HttpEntity'
+        locale:
+          type: string
+        statusLine:
+          $ref: '#/components/schemas/StatusLine'
+        reasonPhrase:
+          type: string
+          writeOnly: true
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Header'
+          writeOnly: true
+        params:
+          $ref: '#/components/schemas/HttpParams'
+          deprecated: true
+        protocolVersion:
+          $ref: '#/components/schemas/ProtocolVersion'
+        allHeaders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Header'
+        header:
+          $ref: '#/components/schemas/Header'
+          writeOnly: true
+    NameValuePair:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    ProtocolVersion:
+      type: object
+      properties:
+        protocol:
+          type: string
+        major:
+          type: integer
+          format: int32
+        minor:
+          type: integer
+          format: int32
+    StandardServerErrorResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: Current timestamp
+          example: "2021-02-26T11:11:10.152Z"
+        status:
+          $ref: '#/components/schemas/HttpResponse'
+          description: Response Error Code
+          example: 500
+        error:
+          type: string
+          description: Internal Server Error
+          example: Internal Server Error
+        message:
+          type: string
+        path:
+          type: string
+          description: Path of the endpoint
+          example: /endpoint name
+      required:
+        - error
+        - message
+        - path
+        - status
+        - timestamp
+    StatusLine:
+      type: object
+      properties:
+        reasonPhrase:
+          type: string
+        statusCode:
+          type: integer
+          format: int32
+        protocolVersion:
+          $ref: '#/components/schemas/ProtocolVersion'
+    UserIdentification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum:
+            - national
+            - passport
+        value:
+          type: string
+        country:
+          type: string
+      required:
+        - id
+        - type
+        - value
+    EmergencyContactInput:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          minLength: 0
+        phone:
+          type: string
+          maxLength: 255
+          minLength: 0
+        relation:
+          type: string
+          maxLength: 255
+          minLength: 0
+      required:
+        - name
+        - phone
+    UserEmergencyContact:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        phone:
+          type: string
+        relation:
+          type: string
+      required:
+        - id
+        - name
+    ChildInput:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          minLength: 0
+        birthDate:
+          type: string
+          format: date
+          description: birthDate can be Past or Present only
+      required:
+        - name
+    UserChild:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        birthDate:
+          type: string
+          format: date
+      required:
+        - id
+        - name
+    UserInput:
+      type: object
+      properties:
+        givenName:
+          type: string
+          maxLength: 255
+          minLength: 0
+        familyName:
+          type: string
+          maxLength: 255
+          minLength: 0
+        preferredName:
+          type: string
+          maxLength: 255
+          minLength: 0
+        email:
+          type: string
+        phone:
+          type: string
+        employmentStartDate:
+          type: string
+          format: date
+        firstDayOfWork:
+          type: string
+          format: date
+        supervisor:
+          type: string
+          format: uuid
+        invite:
+          type: boolean
+        inviteSubject:
+          type: string
+        inviteMessage:
+          type: string
+        inviteLanguage:
+          type: string
+          format: ISO 639-1
+        groups:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+      required:
+        - email
+        - familyName
+        - givenName
+        - groups
+    AccountStatus:
+      type: object
+      properties:
+        active:
+          type: boolean
+        deactivatedBy:
+          description: Not returned in user lists
+          required:
+            - email
+            - familyName
+            - givenName
+            - id
+            - type
+        deactivatedAt:
+          type: string
+          format: date-time
+          description: Not returned in user lists
+      required:
+        - active
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        line3:
+          type: string
+        postalCode:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+      required:
+        - city
+        - country
+        - line1
+        - postalCode
+    Company:
+      allOf:
+        - $ref: '#/components/schemas/OrgUnit'
+        - type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            members:
+              type: array
+              items:
+                $ref: '#/components/schemas/SimpleUser'
+            organizationNumber:
+              type: string
+            invalidOrganizationNumber:
+              type: boolean
+            address:
+              $ref: '#/components/schemas/Address'
+            type:
+              type: string
+              enum:
+                - organization
+                - user
+                - location
+                - team
+                - subordinates
+                - company
+                - service_user
+      required:
+        - id
+        - name
+        - type
+    Group:
+      allOf:
+        - $ref: '#/components/schemas/OrgUnit'
+        - type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            members:
+              type: array
+              items:
+                $ref: '#/components/schemas/SimpleUser'
+      required:
+        - id
+        - name
+    JobTitleSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+      required:
+        - id
+        - name
+    Location:
+      allOf:
+        - $ref: '#/components/schemas/OrgUnit'
+        - type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            members:
+              type: array
+              items:
+                $ref: '#/components/schemas/SimpleUser'
+            address:
+              $ref: '#/components/schemas/Address'
+            type:
+              type: string
+              enum:
+                - organization
+                - user
+                - location
+                - team
+                - subordinates
+                - company
+                - service_user
+      required:
+        - id
+        - name
+        - type
+    SimpleUser:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        givenName:
+          type: string
+        familyName:
+          type: string
+        preferredName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        avatarUrl:
+          type: string
+        jobTitle:
+          $ref: '#/components/schemas/JobTitleSummary'
+        type:
+          type: string
+          enum:
+            - organization
+            - user
+            - location
+            - team
+            - subordinates
+            - company
+            - service_user
+        status:
+          $ref: '#/components/schemas/AccountStatus'
+        invitedAt:
+          type: string
+          format: date-time
+      required:
+        - email
+        - familyName
+        - givenName
+        - id
+        - type
+    Team:
+      allOf:
+        - $ref: '#/components/schemas/OrgUnit'
+        - type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            members:
+              type: array
+              items:
+                $ref: '#/components/schemas/SimpleUser'
+            type:
+              type: string
+              enum:
+                - organization
+                - user
+                - location
+                - team
+                - subordinates
+                - company
+                - service_user
+      required:
+        - id
+        - name
+        - type
+    User:
+      allOf:
+        - $ref: '#/components/schemas/OrgUnit'
+        - type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            givenName:
+              type: string
+            familyName:
+              type: string
+            preferredName:
+              type: string
+            email:
+              type: string
+            phone:
+              type: string
+            avatarUrl:
+              type: string
+            jobTitle:
+              $ref: '#/components/schemas/JobTitleSummary'
+            teams:
+              type: array
+              items:
+                $ref: '#/components/schemas/Team'
+            locations:
+              type: array
+              items:
+                $ref: '#/components/schemas/Location'
+            companies:
+              type: array
+              items:
+                $ref: '#/components/schemas/Company'
+            groups:
+              type: array
+              items:
+                $ref: '#/components/schemas/Group'
+            type:
+              type: string
+              enum:
+                - organization
+                - user
+                - location
+                - team
+                - subordinates
+                - company
+                - service_user
+            status:
+              $ref: '#/components/schemas/AccountStatus'
+      required:
+        - email
+        - familyName
+        - givenName
+        - id
+        - status
+        - type
+    HumaImage:
+      type: object
+      properties:
+        url:
+          type: string
+        width:
+          type: integer
+          format: int32
+        height:
+          type: integer
+          format: int32
+      required:
+        - url
+    JobTitle:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - id
+        - name
+    OrgUnit:
+      discriminator:
+        propertyName: type
+      properties:
+        type:
+          type: string
+      required:
+        - type
+    Credentials:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+        token_type:
+          type: string
+        organizationId:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        authOrigin:
+          type: string
+          format: uuid
+        authProvider:
+          type: string
+        expires_in:
+          type: integer
+          format: int64
+        access_token:
+          type: string
+      required:
+        - access_token
+        - expires_in
+        - organizationId
+        - token_type
+        - userId
+    AuthCodeGrantTypeInput:
+      allOf:
+        - $ref: '#/components/schemas/GrantTypeInput'
+        - type: object
+          properties:
+            client_id:
+              type: string
+              format: uuid
+            provider:
+              type: string
+              enum:
+                - email_otp
+                - email_password
+                - google
+                - microsoft
+                - clerk
+                - okta
+                - auth0
+                - azure
+                - openid_connect
+            providerId:
+              type: string
+              format: uuid
+            code:
+              type: string
+            redirectUri:
+              type: string
+      required:
+        - client_id
+        - code
+        - provider
+    ClientCredentialsGrantTypeInput:
+      allOf:
+        - $ref: '#/components/schemas/GrantTypeInput'
+        - type: object
+          properties:
+            client_id:
+              type: string
+              format: uuid
+            client_secret:
+              type: string
+              format: uuid
+      required:
+        - client_id
+        - client_secret
+    EmailGrantTypeInput:
+      allOf:
+        - $ref: '#/components/schemas/GrantTypeInput'
+        - type: object
+          properties:
+            client_id:
+              type: string
+              format: uuid
+            email:
+              type: string
+            code:
+              type: string
+            redirectUri:
+              type: string
+      required:
+        - client_id
+        - code
+        - email
+    GrantTypeInput:
+      discriminator:
+        propertyName: grant_type
+      properties:
+        grant_type:
+          type: string
+      required:
+        - grant_type
+    PasswordGrantTypeInput:
+      allOf:
+        - $ref: '#/components/schemas/GrantTypeInput'
+        - type: object
+          properties:
+            client_id:
+              type: string
+              format: uuid
+            username:
+              type: string
+            password:
+              type: string
+            redirectUri:
+              type: string
+      required:
+        - client_id
+        - password
+        - username
+    RefreshGrantTypeInput:
+      allOf:
+        - $ref: '#/components/schemas/GrantTypeInput'
+        - type: object
+          properties:
+            refresh_token:
+              type: string
+      required:
+        - refresh_token
+    AddressUpdateInput:
+      type: object
+      properties:
+        line1:
+          type: string
+          maxLength: 255
+          minLength: 0
+        line2:
+          type: string
+          maxLength: 255
+          minLength: 0
+        line3:
+          type: string
+          maxLength: 255
+          minLength: 0
+        postalCode:
+          type: string
+          maxLength: 255
+          minLength: 0
+        city:
+          type: string
+          maxLength: 255
+          minLength: 0
+        country:
+          type: string
+          format: ISO 3166-1 alpha-2
+          maxLength: 2
+          minLength: 0
+      required:
+        - city
+        - country
+        - line1
+        - line2
+        - line3
+        - postalCode
+    BankAccountInput:
+      discriminator:
+        propertyName: type
+      properties:
+        type:
+          type: string
+      required:
+        - type
+    InternationalBankAccountInput:
+      allOf:
+        - $ref: '#/components/schemas/BankAccountInput'
+        - type: object
+          properties:
+            iban:
+              type: string
+            bic:
+              type: string
+      required:
+        - bic
+        - iban
+    NationalBankAccountInput:
+      allOf:
+        - $ref: '#/components/schemas/BankAccountInput'
+        - type: object
+          properties:
+            number:
+              type: string
+              maxLength: 255
+              minLength: 0
+            country:
+              type: string
+              format: ISO 3166-1 alpha-2
+              maxLength: 2
+              minLength: 0
+      required:
+        - country
+        - number
+    UserDetailsInput:
+      type: object
+      properties:
+        givenName:
+          type: string
+          maxLength: 255
+          minLength: 0
+        familyName:
+          type: string
+          maxLength: 255
+          minLength: 0
+        preferredName:
+          type: string
+          maxLength: 255
+          minLength: 0
+        email:
+          type: string
+          maxLength: 255
+          minLength: 0
+        phone:
+          type: string
+          maxLength: 255
+          minLength: 0
+        nationality:
+          type: string
+          format: ISO 3166-1 alpha-2
+          maxLength: 2
+          minLength: 0
+        birthDate:
+          type: string
+          format: date
+        homeAddress:
+          $ref: '#/components/schemas/AddressUpdateInput'
+        civilStatus:
+          type: string
+          enum:
+            - Married
+            - Relationship
+            - Single
+        gender:
+          type: string
+          description: '''Male'', ''Female'' or free text'
+          maxLength: 255
+          minLength: 0
+        dietaryRequirements:
+          type: string
+          maxLength: 2040
+          minLength: 0
+        interests:
+          type: array
+          items: {}
+          maxItems: 50
+          minItems: 0
+        funfacts:
+          type: string
+          maxLength: 2040
+          minLength: 0
+        bankAccount:
+          oneOf:
+            - $ref: '#/components/schemas/InternationalBankAccountInput'
+            - $ref: '#/components/schemas/NationalBankAccountInput'
+        supervisor:
+          type: string
+          format: uuid
+        jobTitle:
+          type: string
+          format: uuid
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        jobDescription:
+          type: string
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+          maxLength: 10200
+          minLength: 0
+        employmentId:
+          type: string
+          maxLength: 255
+          minLength: 0
+        employmentType:
+          type: string
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+          enum:
+            - Permanent
+            - Temporary
+            - Casual
+            - Trainee
+            - Consultant
+        terminationNoticeDate:
+          type: string
+          format: date
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        probationEndDate:
+          type: string
+          format: date
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        employmentStartDate:
+          type: string
+          format: date
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        firstDayOfWork:
+          type: string
+          format: date
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        employmentEndDate:
+          type: string
+          format: date
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        lastDayOfWork:
+          type: string
+          format: date
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        employmentPercentage:
+          type: integer
+          format: int32
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+          maximum: 100
+          minimum: 0
+        excludeFromInsights:
+          type: boolean
+        excludeFromSurveys:
+          type: boolean
+        privateEmail:
+          type: string
+          maxLength: 255
+          minLength: 0
+        custom:
+          type: object
+          additionalProperties: {}
+    BankAccount:
+      type: object
+      discriminator:
+        propertyName: type
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+      required:
+        - code
+        - type
+    BirthDateField:
+      type: object
+      properties:
+        value:
+          type: string
+          format: date
+        editable:
+          type: boolean
+        showBirthday:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+      required:
+        - editable
+    Completeness:
+      type: object
+      properties:
+        filled:
+          type: integer
+          format: int32
+        available:
+          type: integer
+          format: int32
+      required:
+        - available
+        - filled
+    CustomFieldObject:
+      type: object
+      properties:
+        label:
+          type: string
+        value: {}
+        placeholder:
+          type: string
+        editable:
+          type: boolean
+        section:
+          type: string
+          enum:
+            - intro
+            - employment
+            - personalia
+            - misc
+        type:
+          type: string
+          enum:
+            - text
+            - textarea
+            - number
+            - decimal
+            - boolean
+            - localdate
+            - enum
+            - url
+        options:
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - editable
+        - label
+        - section
+        - type
+    EmailField:
+      type: object
+      properties:
+        value:
+          type: string
+        editable:
+          type: boolean
+        requestedValue:
+          type: string
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+        - value
+    FieldAddress:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/Address'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldBankAccount:
+      type: object
+      properties:
+        value:
+          oneOf:
+            - $ref: '#/components/schemas/InternationalBankAccount'
+            - $ref: '#/components/schemas/NationalBankAccount'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldBoolean:
+      type: object
+      properties:
+        value:
+          type: boolean
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldCivilStatus:
+      type: object
+      properties:
+        value:
+          type: string
+          enum:
+            - Married
+            - Relationship
+            - Single
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldEmploymentType:
+      type: object
+      properties:
+        value:
+          type: string
+          enum:
+            - Permanent
+            - Temporary
+            - Casual
+            - Trainee
+            - Consultant
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldHumaImage:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/HumaImage'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldInteger:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int32
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldJobTitle:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/JobTitle'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldListCompany:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldListGroup:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldListLocation:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldListString:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: string
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldListTeam:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldListUserChild:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserChild'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldListUserEmergencyContact:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserEmergencyContact'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldListUserIdentification:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserIdentification'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldSalary:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/Salary'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldSimpleUser:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/SimpleUser'
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    FieldString:
+      type: object
+      properties:
+        value:
+          type: string
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+        integrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationMeta'
+      required:
+        - editable
+    IntegrationExternalUserRef:
+      type: object
+      properties:
+        type:
+          type: string
+        externalId:
+          type: string
+      required:
+        - externalId
+        - type
+    IntegrationMeta:
+      type: object
+      properties:
+        warning:
+          type: string
+          enum:
+            - locked_disconnect
+            - possibly_locked_disconnect
+      required:
+        - warning
+    InternationalBankAccount:
+      allOf:
+        - $ref: '#/components/schemas/BankAccount'
+        - type: object
+          properties:
+            iban:
+              type: string
+            bic:
+              type: string
+      required:
+        - bic
+        - iban
+    Jubilee:
+      type: object
+      properties:
+        type:
+          type: string
+        date:
+          type: string
+          format: date
+        originalDate:
+          type: string
+          format: date
+        years:
+          type: integer
+          format: int32
+        user:
+          $ref: '#/components/schemas/SimpleUser'
+        public:
+          type: boolean
+      required:
+        - date
+        - originalDate
+        - public
+        - type
+        - years
+    LocalDateField:
+      type: object
+      properties:
+        value:
+          type: string
+          format: date
+        editable:
+          type: boolean
+        completeness:
+          type: string
+          enum:
+            - details
+            - important
+      required:
+        - editable
+    NationalBankAccount:
+      allOf:
+        - $ref: '#/components/schemas/BankAccount'
+        - type: object
+          properties:
+            number:
+              type: string
+              maxLength: 255
+              minLength: 0
+            country:
+              type: string
+      required:
+        - country
+        - number
+    ProfileCompleteness:
+      type: object
+      properties:
+        important:
+          $ref: '#/components/schemas/Completeness'
+        details:
+          $ref: '#/components/schemas/Completeness'
+      required:
+        - details
+        - important
+    Salary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        periodUnit:
+          type: string
+          enum:
+            - hourly
+            - weekly
+            - monthly
+            - yearly
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        fromDate:
+          type: string
+          format: date
+        toDate:
+          type: string
+          format: date
+        note:
+          type: string
+        current:
+          type: boolean
+      required:
+        - amount
+        - currency
+        - current
+        - id
+        - periodUnit
+    UserDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        givenName:
+          $ref: '#/components/schemas/FieldString'
+        familyName:
+          $ref: '#/components/schemas/FieldString'
+        preferredName:
+          $ref: '#/components/schemas/FieldString'
+        email:
+          $ref: '#/components/schemas/EmailField'
+        avatarUrl:
+          $ref: '#/components/schemas/FieldString'
+        avatarImage:
+          $ref: '#/components/schemas/FieldHumaImage'
+        coverImageUrl:
+          $ref: '#/components/schemas/FieldString'
+        birthDate:
+          $ref: '#/components/schemas/BirthDateField'
+        phone:
+          $ref: '#/components/schemas/FieldString'
+        homeAddress:
+          $ref: '#/components/schemas/FieldAddress'
+        gender:
+          $ref: '#/components/schemas/FieldString'
+        nationality:
+          $ref: '#/components/schemas/FieldString'
+        civilStatus:
+          $ref: '#/components/schemas/FieldCivilStatus'
+        children:
+          $ref: '#/components/schemas/FieldListUserChild'
+        privateEmail:
+          $ref: '#/components/schemas/FieldString'
+        dietaryRequirements:
+          $ref: '#/components/schemas/FieldString'
+        interests:
+          $ref: '#/components/schemas/FieldListString'
+        funfacts:
+          $ref: '#/components/schemas/FieldString'
+        emergencyContacts:
+          $ref: '#/components/schemas/FieldListUserEmergencyContact'
+        identifications:
+          $ref: '#/components/schemas/FieldListUserIdentification'
+        employmentId:
+          $ref: '#/components/schemas/FieldString'
+        employmentType:
+          $ref: '#/components/schemas/FieldEmploymentType'
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        teams:
+          $ref: '#/components/schemas/FieldListTeam'
+        locations:
+          $ref: '#/components/schemas/FieldListLocation'
+        companies:
+          $ref: '#/components/schemas/FieldListCompany'
+        groups:
+          $ref: '#/components/schemas/FieldListGroup'
+        supervisor:
+          $ref: '#/components/schemas/FieldSimpleUser'
+        subordinatesCount:
+          type: integer
+          format: int32
+        jobTitle:
+          $ref: '#/components/schemas/FieldJobTitle'
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        jobDescription:
+          $ref: '#/components/schemas/FieldString'
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        terminationNoticeDate:
+          $ref: '#/components/schemas/LocalDateField'
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        probationEndDate:
+          $ref: '#/components/schemas/LocalDateField'
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        employmentStartDate:
+          $ref: '#/components/schemas/LocalDateField'
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        firstDayOfWork:
+          $ref: '#/components/schemas/LocalDateField'
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        employmentEndDate:
+          $ref: '#/components/schemas/LocalDateField'
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        lastDayOfWork:
+          $ref: '#/components/schemas/LocalDateField'
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        employmentPercentage:
+          $ref: '#/components/schemas/FieldInteger'
+          deprecated: true
+          description: Will be moved to new position endpoints soon
+        bankAccount:
+          $ref: '#/components/schemas/FieldBankAccount'
+        invitedAt:
+          type: string
+          format: date-time
+        lastLoggedInAt:
+          type: string
+          format: date-time
+        connectedIntegrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationExternalUserRef'
+        completeness:
+          $ref: '#/components/schemas/ProfileCompleteness'
+        salary:
+          $ref: '#/components/schemas/FieldSalary'
+        jubileesToday:
+          type: array
+          items:
+            $ref: '#/components/schemas/Jubilee'
+        excludeFromInsights:
+          $ref: '#/components/schemas/FieldBoolean'
+        excludeFromSurveys:
+          $ref: '#/components/schemas/FieldBoolean'
+        custom:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/CustomFieldObject'
+        status:
+          $ref: '#/components/schemas/AccountStatus'
+        type:
+          type: string
+          enum:
+            - organization
+            - user
+            - location
+            - team
+            - subordinates
+            - company
+            - service_user
+      required:
+        - email
+        - familyName
+        - givenName
+        - id
+        - status
+        - subordinatesCount
+        - type
+    PageUser:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        filters:
+          type: object
+          additionalProperties: {}
+        meta:
+          type: object
+          additionalProperties: {}
+      required:
+        - items
+    WorkSchedule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        countryCode:
+          type: string
+        weekDays:
+          type: array
+          deprecated: true
+          description: Use weekWorkDays
+          items:
+            type: integer
+            format: int32
+          uniqueItems: true
+        weekWorkDays:
+          type: array
+          items:
+            type: string
+            enum:
+              - MONDAY
+              - TUESDAY
+              - WEDNESDAY
+              - THURSDAY
+              - FRIDAY
+              - SATURDAY
+              - SUNDAY
+          uniqueItems: true
+        default:
+          type: boolean
+        userCount:
+          type: integer
+          format: int32
+        archived:
+          type: boolean
+      required:
+        - archived
+        - default
+        - id
+        - name
+        - weekDays
+        - weekWorkDays
+    Supervisor:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        givenName:
+          type: string
+        familyName:
+          type: string
+        preferredName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        avatarUrl:
+          type: string
+        jobTitle:
+          $ref: '#/components/schemas/JobTitle'
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        subordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleUser'
+      required:
+        - email
+        - familyName
+        - givenName
+        - id
+        - subordinates
+    PageJubilee:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Jubilee'
+        filters:
+          type: object
+          additionalProperties: {}
+        meta:
+          type: object
+          additionalProperties: {}
+      required:
+        - items
+    PageGroup:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        filters:
+          type: object
+          additionalProperties: {}
+        meta:
+          type: object
+          additionalProperties: {}
+      required:
+        - items
+  securitySchemes:
+    authentication:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /auth/oauth/token
+          scopes: {}
